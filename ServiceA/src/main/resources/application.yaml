@@ -33,3 +33,10 @@ resilience4j:
         registerHealthIndicator: true
         maxRetryAttempts: 5
         waitDuration: 10s
+  rateLimiter:
+    instances:
+      serviceA:
+        registerHealthIndicator: false
+        limitForPeriod: 10
+        limitRefreshPeriod: 10s
+        timeoutDuration: 3s

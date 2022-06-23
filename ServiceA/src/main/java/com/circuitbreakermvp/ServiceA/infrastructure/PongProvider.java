@@ -1,6 +1,7 @@
 package com.circuitbreakermvp.ServiceA.infrastructure;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ public class PongProvider {
     private int count = 0;
 
 //    @CircuitBreaker(name = SERVICE_A, fallbackMethod = "pongFallback")
-    @Retry(name = SERVICE_A)
+//    @Retry(name = SERVICE_A)
+    @RateLimiter(name = SERVICE_A)
     public String pong() {
         System.out.println("Retry method called " + ++count + " times at " + new Date());
         return restTemplate.getForObject(BASE_URL + "pong", String.class);
